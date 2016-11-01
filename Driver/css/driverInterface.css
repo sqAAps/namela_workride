@@ -1,0 +1,129 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+	background-color: #5A6E8B;
+}
+div.map-canvas{
+	height: 260px;
+    width: 92%;
+    margin: -5px 3% 20px 5%;
+    padding: 0;
+	display: none;
+}
+div#header{
+	background-color: #FFBA66;
+    color: white;
+    width: 100%;
+    padding: 10px 0px;
+    position: fixed;
+    text-align: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    top: 0px;
+    z-index: 3;
+}
+img#forward{
+	height: 24px;
+    position: absolute;
+    right: 4%;
+}
+div#driverInterface{
+	margin-top: 50px;
+    padding-top: 5px
+}
+div.request_holder{
+	background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: #5A6E8B;
+    margin: 7px 2%;
+}
+div.request_container{
+	padding: 2%;
+    background-color: white;
+    border-style: solid;
+    border-color: silver;
+    border-width: 0px 0px 0px 15px;
+    border-radius: 8px;
+}
+p#full_names{
+	margin: 0;
+    font-size: 16px;
+	font-family: sans-serif;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    border-color: gainsboro;
+    display: block;
+    width: 80%;
+    margin-left: 5%;
+	padding-bottom: 2px;
+}
+p#contact_details{
+	margin: 0px;
+    font-family: sans-serif;
+    font-size: 14px;
+	margin-left: 5%;
+    margin-top: 4px;
+}
+
+
+span#work_check{
+	font-size: 10px;
+    font-family: monospace;
+    margin: 0;
+    text-align: center;
+}
+div#work_login_time, div#work_logout_time{
+	display: inline-block;
+    width: 49%;
+}
+img.add, img.remove{
+	position: absolute;
+    width: 6%;
+    right: 5%;
+}
+img.remove{
+display: none;
+}
+img.location_img{
+	height: 10px;
+}
+p.work_times{
+    margin: 0;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+div.request_pickup{
+	margin: 10px 0px 2px 0px;
+}
+div.request_pickup_details{
+	display: inline-block;
+    width: 31%;
+}
+p.request_pickup_text{
+	font-size: 10px;
+    font-family: monospace;
+    margin: 0;
+}
+p.request_pickup_selected{
+	margin: 0;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+
+
+
+button#confirm_page{
+	margin: 15px 3% 15px 3%;
+    color: white;
+    background-color: orange;
+    width: 94%;
+    border: 0px solid orange;
+    border-radius: 0px;
+    font-size: 23px;
+    padding: 5px 0px;
+}

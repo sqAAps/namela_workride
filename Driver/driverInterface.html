@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/jquery.js"></script>
+		<script src="js/chores.js"></script>
+		<link href='css/driverInterface.css' rel='stylesheet' type="text/css">
+        <link href="images/background.png" rel="shortcut icon">
+        <title>workRide: Driver</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+    </head>
+	<body>
+		<div id="header">
+			workRide
+			<img id="forward" src="images/forward.png"/>
+		</div>
+		
+		<div id="driverInterface"></div>
+		
+		<script type="text/javascript">
+			function load_requests(){
+				var driverInterface = _("driverInterface");
+				//var ajax = ajaxObj("POST", "http://sqaaps.co.za/php/driverInterface.php");
+				var ajax = ajaxObj("POST", "php/driverInterface.php");
+				ajax.onreadystatechange = function() {
+					if(ajaxReturn(ajax) == true) {
+						driverInterface.innerHTML = ajax.responseText;
+					}
+				}
+				ajax.send("load_requests="+'');
+			}
+			window.onload = load_requests;
+
+			function toggle_menu(id, home_address, work_address, work_login_time, work_logout_time){
+				var home = home_address.split(",");
+				var homelat = parseFloat(home[0]);
+				var homelng = parseFloat(home[1]);
+
+				var work = work_address.split(",");
+				var worklat = parseFloat(work[0]);
+				var worklng = parseFloat(work[1]);
+				
+				var workCheckIn = work_login_time;
+				var workCheckOut = work_logout_time;
+				
+				
+				//_(id).style.display = "block";
+				$("#"+id).slideToggle();
+				
+				var mapOptions = {
+                    center: new google.maps.LatLng(homelat, homelng),
+                    zoom: 16,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+				map = new google.maps.Map(document.getElementById(id), mapOptions);
+				
+				var home = {
+					url: 'images/home.png',
+					origin: new google.maps.Point(homelat, homelng),
+					anchor: new google.maps.Point(0, 0)
+				};
+				var home_marker = new google.maps.Marker({
+					position: {lat: homelat, lng: homelng},
+				  	map: map,
+				  	icon: home
+				});
+				
+				var work = {
+					url: 'images/work.png',
+					origin: new google.maps.Point(worklat, worklng),
+					anchor: new google.maps.Point(0, 0)
+				};
+				var work_marker = new google.maps.Marker({
+					position: {lat: worklat, lng: worklng},
+				  	map: map,
+				  	icon: work
+				});
+			}
+			
+			function addRequest(id){
+				_("add"+id).style.display = "none";
+				_("request_container"+id).style.borderColor = "lime";
+				_("remove"+id).style.display = "block";
+			}
+			
+			function removeRequest(id){
+				_("add"+id).style.display = "block";
+				_("request_container"+id).style.borderColor = "silver";
+				_("remove"+id).style.display = "none";
+			}
+		</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBKNw43pyWzAAL5WBLckWLw-7nZtEhBbc&v=3&libraries=places"></script>
+	</body>
+</html>

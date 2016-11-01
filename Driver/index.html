@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/jquery.js"></script>
+		
+		<script src="js/chores.js" type="text/javascript"></script>
+		<link href='css/driver.css' rel='stylesheet' type="text/css">
+		<link href='css/register.css' rel='stylesheet' type="text/css">
+        <link href="images/background.png" rel="shortcut icon">
+        <title>workRide:Driver</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+    </head>
+	<body>
+		<div id="header">workRide</div>
+		
+		<div id="container">
+			<h1 id="promote">DRIVER LOGIN</h1>
+			
+			<div id="value_prop">
+				Welcome to workRide the easiest way to find commuters.
+				<p id="value_prop_para">All drivers are required to login before committing to transport clients.</p>
+			</div>
+			
+			<form id="driver_login" name="driver_login" onsubmit="return false;" >
+				<div class="chapter_section">
+					<p class="chapter_section_head">Driver Profile</p>
+					
+					<p id="input_head">Vehicle Registration</p>
+					<input class="register_inputs" id="vehicleVIN" placeholder=" VIN " type="text" />
+					
+					<p id="input_head">Password</p>
+					<input class="register_inputs" id="driver_password" placeholder="password" type="password" />
+					
+					<p id="error_messages"></p>
+					
+					<button id="submit" onclick="login()">LOGIN</button>
+				</div>
+			</form>	
+		</div>
+		
+		<script type="text/javascript">
+			function login(){
+				var v = _("vehicleVIN").value;
+				var p = _("driver_password").value;
+					
+				var status = _("error_messages");
+				
+				if(v == ""){
+					_("vehicleVIN").style.borderColor = "red";
+					_("vehicleVIN").style.borderWidth = "3px";		
+                } 
+				else if(p == ""){
+					_("driver_password").style.borderColor = "red";
+					_("driver_password").style.borderWidth = "3px";
+				}
+				else {
+					_("vehicleVIN").style.borderColor = "gainsboro";
+					_("vehicleVIN").style.borderWidth = "1px";
+					_("driver_password").style.borderColor = "gainsboro";
+					_("driver_password").style.borderWidth = "1px";
+					
+                    _("submit").disabled = true;
+                    status.innerHTML = 'please wait ...';
+                    //var ajax = ajaxObj("POST", "http://sqaaps.co.za/php/driverlogin.php");
+					var ajax = ajaxObj("POST", "php/driverlogin.php");
+                    ajax.onreadystatechange = function() {
+                        if(ajaxReturn(ajax) == true) {
+                            if(ajax.responseText == "Success"){
+								window.location.assign("driverInterface.html")
+                            } else {
+								status.innerHTML = ajax.responseText;
+								_("submit").disabled = false;
+                            }
+                        }
+                    }
+                    ajax.send("v="+v+"&p="+p);
+                }
+            }
+		</script>
+		
+	</body>
+</html>
